@@ -174,12 +174,12 @@ function handleTouchEnd() {
 }
 
 // Event Binding
-if ('PointerEvent' in window) {
+
   container.addEventListener('pointerdown', handlePointerDown);
   container.addEventListener('pointermove', handlePointerMove);
   container.addEventListener('pointerup', handlePointerUp);
-} else {
+
   container.addEventListener('touchstart', handleTouchStart, { passive: false });
   container.addEventListener('touchmove', handleTouchMove, { passive: false });
   container.addEventListener('touchend', handleTouchEnd);
-}
+
