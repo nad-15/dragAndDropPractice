@@ -1,0 +1,118 @@
+:root {
+    --calendar-bg: #ffffff;
+    --calendar-text: #333;
+    --calendar-accent: #007bff;
+    --calendar-border: #ddd;
+    --calendar-header-bg: #f8f8f8;
+    --calendar-day-bg: #f0f0f0;
+  }
+
+  /* Reset common spacing */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  
+  /* Toggle Button */
+  .show-vert-calendar-btn {
+    /* margin: 1rem; */
+    /* padding: 0.75rem 1.2rem; */
+    background-color: var(--calendar-accent);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+  }
+  
+  /* Calendar Container */
+  .calendar-container-vert-view {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--calendar-bg);
+    display: flex;
+    flex-direction: column;
+    z-index: 1000;
+    box-sizing: border-box;
+    overflow: hidden;
+  }
+  
+  /* Header */
+  .calendar-header-vert-view {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--calendar-header-bg);
+    padding: 0.5rem 1rem;
+    border-radius: 10px;
+    margin-bottom: 0.5rem;
+  }
+  
+  .month-label-vert-view {
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
+  
+  .nav-button-vert-view {
+    background-color: var(--calendar-accent);
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    font-size: 1rem;
+  }
+  
+  /* Day Names */
+  .calendar-vert-view {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    text-align: center;
+    font-weight: bold;
+    padding: 0.25rem 0;
+    color: var(--calendar-text);
+  }
+  
+  /* Day Names Styling */
+  .day-name-vert-view {
+    background-color: var(--calendar-day-bg);
+    padding: 0.5rem 0;
+    border: 1px solid var(--calendar-border);
+  }
+  
+  /* Days Grid */
+  .days-grid-vert-view {
+    flex-grow: 1;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: repeat(6, 1fr);
+    gap: 1px;
+    overflow: hidden;
+  }
+  
+  .days-grid-vert-view > div {
+    background-color: white;
+    border: 1px solid var(--calendar-border);
+    padding: 0.5rem;
+    text-align: center;
+    font-size: 1rem;
+    box-sizing: border-box;
+  }
+
+  /* Previous/next month day style */
+.adjacent-month-vert-view {
+    color: var(--muted-text, #999);
+    opacity: 0.5;
+  }
+  
+  
+  /* Optional: Scroll fix on smaller screens */
+  @media (max-height: 600px) {
+    .calendar-container-vert-view {
+      overflow-y: auto;
+    }
+  }
+  

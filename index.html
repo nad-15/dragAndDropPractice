@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="styles.css" />
+  <title>Document</title>
+</head>
+<body>
+
+  <!-- vertical view calendar -->
+
+  <!-- Button to Toggle Calendar Visibility -->
+  <button id="show-vert-calendar-btn" class="show-vert-calendar-btn">Show Calendar</button>
+
+  <!-- Calendar Container -->
+  <div class="calendar-container-vert-view" id="calendar-container-vert-view">
+    <div class="calendar-header-vert-view">
+      <button id="prev-month-vert-view" class="nav-button-vert-view">Prev</button>
+      <div class="month-label-vert-view" id="month-label-vert-view">May 2025</div>
+      <button id="next-month-vert-view" class="nav-button-vert-view">Next</button>
+    </div>
+
+    <!-- Grid for days of the week -->
+    <div class="calendar-vert-view">
+      <div class="day-name-vert-view">Sun</div>
+      <div class="day-name-vert-view">Mon</div>
+      <div class="day-name-vert-view">Tue</div>
+      <div class="day-name-vert-view">Wed</div>
+      <div class="day-name-vert-view">Thu</div>
+      <div class="day-name-vert-view">Fri</div>
+      <div class="day-name-vert-view">Sat</div>
+    </div>
+
+    <!-- Calendar Days Grid (Filled Dynamically) -->
+    <div class="days-grid-vert-view" id="days-grid-vert-view">
+      <!-- Days will be inserted dynamically here -->
+    </div>
+  </div>
+
+  <!-- vertical view calendar end -->
+
+  <!-- popup for daily task, end line -->
+  <div class="daily-task-popup" id="daily-task-popup">
+    <div class="popup-header">
+      <div class="popup-date">
+        <span class="popup-day-number">4</span>
+        <span class="popup-day-name">Sunday</span>
+      </div>
+      <button id="close-popup">×</button>
+    </div>
+
+    <hr class="popup-divider" />
+
+    <div class="popup-body">
+      <div class="popup-task">
+        <span class="task-color-indicator" style="background-color:#69b;"></span>
+        <div class="task-info">
+          <p class="task-title">My event</p>
+          <p class="task-time">May 3 – May 5</p>
+        </div>
+      </div>
+
+      <!-- More .popup-task blocks go here -->
+    </div>
+
+    <div class="popup-footer">
+      <button class="add-task-button">Add on May 4</button>
+      <button class="round-add-btn">+</button>
+    </div>
+  </div>
+  <!-- popup for daily task, end line -->
+
+  <script src="script.js"></script>
+</body>
+</html>
