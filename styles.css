@@ -5,20 +5,18 @@
     --calendar-border: #ddd;
     --calendar-header-bg: #f8f8f8;
     --calendar-day-bg: #f0f0f0;
+    --muted-text: #999;
   }
-
+  
   /* Reset common spacing */
-* {
+  * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
   }
-
   
   /* Toggle Button */
   .show-vert-calendar-btn {
-    /* margin: 1rem; */
-    /* padding: 0.75rem 1.2rem; */
     background-color: var(--calendar-accent);
     color: white;
     border: none;
@@ -91,6 +89,7 @@
     grid-template-rows: repeat(6, 1fr);
     gap: 1px;
     overflow: hidden;
+    height: 100%;
   }
   
   .days-grid-vert-view > div {
@@ -100,14 +99,50 @@
     text-align: center;
     font-size: 1rem;
     box-sizing: border-box;
+    overflow: hidden;
+    height: 100%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
   }
-
+  
   /* Previous/next month day style */
-.adjacent-month-vert-view {
-    color: var(--muted-text, #999);
+  .adjacent-month-vert-view {
+    color: var(--muted-text);
     opacity: 0.5;
   }
   
+  /* Task styling based on periods */
+  .task-morning,
+  .task-afternoon,
+  .task-evening {
+    padding: 4px;
+    font-size: 0.8rem;
+    margin-bottom: 0.3rem;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+  
+  /* Allow tasks inside the day cell to overflow */
+  .day-vert-view {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 0.5rem;
+    text-align: center;
+    font-size: 0.8rem;
+    height: 100%;
+    position: relative;
+    overflow-y: auto;
+  }
+  
+  /* Task container inside day cell */
+  .day-vert-view .task-info {
+    overflow-y: auto;
+    max-height: 100%;
+  }
   
   /* Optional: Scroll fix on smaller screens */
   @media (max-height: 600px) {
