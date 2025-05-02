@@ -57,75 +57,93 @@ function loadTasksFromLocalStorage() {
   return tasks || {}; // Return tasks or an empty object if nothing exists
 }
 
-// Update calendar grid with tasks
 function updateCalendarWithTasks(month, year) {
-  daysGridVertView.innerHTML = ""; // Clear existing days
-
-  const tasks = loadTasksFromLocalStorage(); // Get the tasks
-  const firstDayOfMonth = new Date(year, month, 1).getDay();
-  const totalDaysInMonth = new Date(year, month + 1, 0).getDate();
-  const totalDaysLastMonth = new Date(year, month, 0).getDate();
-  const monthNames = [
-    "January", "February", "March", "April", "May", "June",
-    "July", "August", "September", "October", "November", "December"
-  ];
-
-  monthLabelVertView.textContent = `${monthNames[month]} ${year}`;
-
-  const totalCells = 42; // 6 rows * 7 days
-
-  for (let i = 0; i < totalCells; i++) {
-    const dayCell = document.createElement("div");
-    dayCell.classList.add("day-vert-view");
-
-    // Previous month's tail
-    if (i < firstDayOfMonth) {
-      const dayNum = totalDaysLastMonth - firstDayOfMonth + 1 + i;
-      dayCell.textContent = dayNum;
-      dayCell.classList.add("adjacent-month-vert-view");
-    }
-    // Current month
-    else if (i < firstDayOfMonth + totalDaysInMonth) {
-      const currentDay = i - firstDayOfMonth + 1;
-      dayCell.textContent = currentDay;
-
-      // Check if this day has any tasks
-      const dayTasks = tasks[`${year}-${month + 1}-${currentDay}`];
-      if (dayTasks) {
-        // Populate the day with tasks if available
-        dayCell.innerHTML = `
-          <div class="task-morning" style="background-color:${dayTasks.morning[0]?.color}">
-            ${dayTasks.morning[0]?.task || ''}
-          </div>
-          <div class="task-afternoon" style="background-color:${dayTasks.afternoon[0]?.color}">
-            ${dayTasks.afternoon[0]?.task || ''}
-          </div>
-          <div class="task-evening" style="background-color:${dayTasks.evening[0]?.color}">
-            ${dayTasks.evening[0]?.task || ''}
-          </div>
-        `;
+    daysGridVertView.innerHTML = ""; // Clear existing days
+  
+    const tasks = loadTasksFromLocalStorage(); // Get the tasks
+    const firstDayOfMonth = new Date(year, month, 1).getDay();
+    const totalDaysInMonth = new Date(year, month + 1, 0).getDate();
+    const totalDaysLastMonth = new Date(year, month, 0).getDate();
+    const monthNames = [
+      "January", "February", "March", "April", "May", "June",
+      "July", "August", "September", "October", "November", "December"
+    ];
+  
+    monthLabelVertView.textContent = `${monthNames[month]} ${year}`;
+  
+    const totalCells = 42; // 6 rows * 7 days
+  
+    for (let i = 0; i < totalCells; i++) {
+      const dayCell = document.createElement("div");
+      dayCell.classList.add("day-vert-view");
+  
+      // Previous month's tail
+      if (i < firstDayOfMonth) {
+        const dayNum = totalDaysLastMonth - firstDayOfMonth + 1 + i;
+        dayCell.textContent = dayNum;
+        dayCell.classList.add("adjacent-month-vert-view");
       }
-
-      // Highlight today
-      if (
-        currentDay === todayVertView.getDate() &&
-        month === todayVertView.getMonth() &&
-        year === todayVertView.getFullYear()
-      ) {
-        dayCell.classList.add("today-vert-view");
+      // Current month
+      else if (i < firstDayOfMonth + totalDaysInMonth) {
+        const currentDay = i - firstDayOfMonth + 1;
+        dayCell.textContent = currentDay;
+  
+        // Check if this day has any tasks
+        const dayTasks = tasks[`${year}-${month + 1}-${currentDay}`];
+        if (dayTasks) {
+          // Append tasks after the day number
+          const taskContainer = document.createElement("div");
+          
+          // Morning task
+          if (dayTasks.morning) {
+            const morningTask = document.createElement("div");
+            morningTask.classList.add("task-morning");
+            morningTask.style.backgroundColor = dayTasks.morning[0]?.color;
+            morningTask.textContent = dayTasks.morning[0]?.task || '';
+            taskContainer.appendChild(morningTask);
+          }
+          
+          // Afternoon task
+          if (dayTasks.afternoon) {
+            const afternoonTask = document.createElement("div");
+            afternoonTask.classList.add("task-afternoon");
+            afternoonTask.style.backgroundColor = dayTasks.afternoon[0]?.color;
+            afternoonTask.textContent = dayTasks.afternoon[0]?.task || '';
+            taskContainer.appendChild(afternoonTask);
+          }
+  
+          // Evening task
+          if (dayTasks.evening) {
+            const eveningTask = document.createElement("div");
+            eveningTask.classList.add("task-evening");
+            eveningTask.style.backgroundColor = dayTasks.evening[0]?.color;
+            eveningTask.textContent = dayTasks.evening[0]?.task || '';
+            taskContainer.appendChild(eveningTask);
+          }
+  
+          dayCell.appendChild(taskContainer); // Add the tasks container after the date
+        }
+  
+        // Highlight today
+        if (
+          currentDay === todayVertView.getDate() &&
+          month === todayVertView.getMonth() &&
+          year === todayVertView.getFullYear()
+        ) {
+          dayCell.classList.add("today-vert-view");
+        }
       }
+      // Next month's head
+      else {
+        const dayNum = i - (firstDayOfMonth + totalDaysInMonth) + 1;
+        dayCell.textContent = dayNum;
+        dayCell.classList.add("adjacent-month-vert-view");
+      }
+  
+      daysGridVertView.appendChild(dayCell);
     }
-    // Next month's head
-    else {
-      const dayNum = i - (firstDayOfMonth + totalDaysInMonth) + 1;
-      dayCell.textContent = dayNum;
-      dayCell.classList.add("adjacent-month-vert-view");
-    }
-
-    daysGridVertView.appendChild(dayCell);
   }
-}
-
+  
 // Navigation buttons
 prevMonthBtnVertView.addEventListener("click", () => {
   currentMonthVertView--;

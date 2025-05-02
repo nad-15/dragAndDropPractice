@@ -117,31 +117,31 @@
   .task-morning,
   .task-afternoon,
   .task-evening {
-    padding: 4px;
-    font-size: 0.8rem;
-    margin-bottom: 0.3rem;
+    font-size: 0.7rem; /* Smaller font size */
+    width: 100%; /* Take the full width of the day cell */
+    background-color: #f0f0f0;
+    border: 1px solid var(--calendar-border);
+    border-radius: 6px; /* Small border radius */
     overflow: hidden;
-    white-space: nowrap;
     text-overflow: ellipsis;
+    white-space: nowrap;
+    display: block;
+    position: relative;
+    box-sizing: border-box;
+    margin-top: 5px; /* Space between the date and the task */
   }
   
-  /* Allow tasks inside the day cell to overflow */
+  /* Ensure task doesn't overlap with date */
   .day-vert-view {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     padding: 0.5rem;
     text-align: center;
-    font-size: 0.8rem;
+    font-size: 0.7rem;
     height: 100%;
     position: relative;
     overflow-y: auto;
-  }
-  
-  /* Task container inside day cell */
-  .day-vert-view .task-info {
-    overflow-y: auto;
-    max-height: 100%;
   }
   
   /* Optional: Scroll fix on smaller screens */
