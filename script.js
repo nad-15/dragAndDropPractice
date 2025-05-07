@@ -124,6 +124,22 @@ nextMonthBtnVertView.addEventListener("click", () => {
   updateCalendarWithTasks(currentMonthVertView, currentYearVertView);
 });
 
+// === ADJUST GRID HEIGHT BASED ON SCREEN SIZE ===
+function adjustGridHeight() {
+  const headerHeight = document.querySelector('.calendar-header-vert-view').offsetHeight;
+  const calendarContainerHeight = calendarContainerVertView.offsetHeight;
+  
+  // Calculate remaining height after subtracting the header and other elements
+  const remainingHeight = calendarContainerHeight - headerHeight;
+
+  // Set the height of the days grid dynamically
+  daysGridVertView.style.height = `${remainingHeight}px`;
+}
+
+// Call the function to adjust grid height initially and when the window is resized
+adjustGridHeight();
+window.addEventListener('resize', adjustGridHeight);
+
 // === INITIAL SETUP ===
 createCalendarGrid();
 updateCalendarWithTasks(currentMonthVertView, currentYearVertView);
