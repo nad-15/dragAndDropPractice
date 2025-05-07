@@ -132,8 +132,14 @@ function adjustGridHeight() {
   // Calculate remaining height after subtracting the header and other elements
   const remainingHeight = calendarContainerHeight - headerHeight;
 
-  // Set the height of the days grid dynamically
-  daysGridVertView.style.height = `${remainingHeight}px`;
+  // Calculate the height of each row by dividing the remaining height by 6
+  const rowHeight = remainingHeight / 6;
+
+  // Apply the calculated height to each day cell
+  const dayCells = daysGridVertView.children;
+  for (let i = 0; i < dayCells.length; i++) {
+    dayCells[i].style.height = `${rowHeight}px`;
+  }
 }
 
 // Call the function to adjust grid height initially and when the window is resized
