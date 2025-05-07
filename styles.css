@@ -37,7 +37,7 @@
   flex-direction: column;
   z-index: 1000;
   box-sizing: border-box;
-  overflow: hidden;
+  overflow: hidden;  /* Prevent overflow */
 }
 
 /* Header */
@@ -83,15 +83,15 @@
 
 /* Days Grid */
 .days-grid-vert-view {
-  flex-grow: 1;
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   grid-template-rows: repeat(6, 1fr);
-  overflow: hidden;
   height: 100%;
   border-top: 2px solid var(--calendar-border);
   border-bottom: 2px solid var(--calendar-border);
-  border-collapse: collapse; /* Ensures no gap between borders */
+  border-collapse: collapse;
+  overflow-y: auto;  /* Makes the grid scrollable */
+  flex-grow: 1;  /* Allow it to grow and fill available space */
 }
 
 /* Cell Style */
@@ -133,6 +133,7 @@
   height: 100%;
   position: relative;
   overflow: hidden;
+  flex-grow: 1; /* Ensure the cells grow to fill available space */
 }
 
 /* Task container scrollable area */
@@ -143,10 +144,6 @@
   display: flex;
   flex-direction: column;
   gap: 1px;
-}
-
-/* Optional: limit max height to ensure scroll area stays within box */
-.day-vert-view > .task-container-vert-view {
   max-height: calc(100% - 1.2rem); /* Leaves space for the date number */
 }
 
@@ -161,18 +158,18 @@
   border: 1px solid var(--calendar-border);
   border-radius: 4px;
   display: flex;
-  flex-wrap: wrap; /* Allows content to wrap within the container */
+  flex-wrap: wrap;
   box-sizing: border-box;
   padding: 4px 6px;
   line-height: 1.3;
-  background-color: #f9f9f9; /* Light background for visibility */
+  background-color: #f9f9f9;
   color: #333;
   word-wrap: break-word;
-  overflow: hidden; /* Prevent overflow */
-  text-overflow: ellipsis; /* Truncate text with '...' */
-  align-items: center; /* Center the content vertically */
-  justify-content: flex-start; /* Align content to the left */
-  white-space: normal; /* Allow text to wrap */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  align-items: center;
+  justify-content: flex-start;
+  white-space: normal;
 }
 
 /* Optional: Scroll fix for short screens */
