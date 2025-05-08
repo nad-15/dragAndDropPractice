@@ -178,6 +178,21 @@
   white-space: normal;
 }
 
+.today-vert-view .day-number {
+  background-color: #2196F3;
+  color: white;
+  border-radius: 50%;
+  width: 15px;
+  height: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  font-weight: bold;
+}
+
+
+
 /* Optional: Scroll fix for short screens */
 @media (max-height: 600px) {
   .calendar-container-vert-view {
