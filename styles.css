@@ -128,11 +128,11 @@
 
 /* Day box container (holds date + task container) */
 .day-vert-view {
-  
+  /* background-color: red; */
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  padding: 0.5rem;
+  padding: 1px;
   text-align: center;
   font-size: 0.7rem;
   height: 100%;
@@ -143,7 +143,7 @@
 
 /* Task container scrollable area */
 .task-container-vert-view {
-
+  /* background: red; */
   margin-top: 4px;
   overflow-y: auto;
   flex-grow: 1;
@@ -158,7 +158,7 @@
 .task-afternoon,
 .task-evening {
   font-family: monospace;
-  font-size: 8px;
+  font-size: 12px;
   width: 100%;
   /* min-height: 15px; */
   border: 1px solid var(--calendar-border);
