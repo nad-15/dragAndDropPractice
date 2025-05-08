@@ -73,7 +73,7 @@ function updateCalendarWithTasks(month, year) {
     } else if (i < firstDayOfMonth + totalDaysInMonth) {
       currentDay = i - firstDayOfMonth + 1;
       dayNumber.textContent = currentDay;
-      dateKey = `${year}-${month + 1}-${currentDay}`;
+      dateKey = `${year}-${month}-${currentDay}`;
 
       const dayTasks = tasks[dateKey];
       if (dayTasks) {
