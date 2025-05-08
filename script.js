@@ -34,16 +34,16 @@ function loadTasksFromLocalStorage() {
   return tasks || {};
 }
 
-// === CREATE FIXED 42 CELLS ===
 function createCalendarGrid() {
   daysGridVertView.innerHTML = "";
+
   for (let i = 0; i < 42; i++) {
     const dayCell = document.createElement("div");
     dayCell.classList.add("day-vert-view");
 
     const dayNumber = document.createElement("div");
     dayNumber.classList.add("day-number");
-    
+
     const taskContainer = document.createElement("div");
     taskContainer.classList.add("task-container-vert-view");
 
@@ -51,7 +51,23 @@ function createCalendarGrid() {
     dayCell.appendChild(taskContainer);
     daysGridVertView.appendChild(dayCell);
   }
+
+  // === SET MAX HEIGHT for each task container after DOM elements are in place
+  const allDayCells = daysGridVertView.querySelectorAll(".day-vert-view");
+  allDayCells.forEach(cell => {
+    const dayNumber = cell.querySelector(".day-number");
+    const taskContainer = cell.querySelector(".task-container-vert-view");
+
+    const cellHeight = cell.clientHeight;
+    const dayNumberHeight = dayNumber.offsetHeight;
+
+    const marginTop = 4; // matches CSS: margin-top: 4px
+    const availableHeight = cellHeight - dayNumberHeight - marginTop;
+
+    taskContainer.style.maxHeight = `${availableHeight}px`;
+  });
 }
+
 
 // === UPDATE DAY CELLS ===
 // function updateCalendarWithTasks(month, year) {
