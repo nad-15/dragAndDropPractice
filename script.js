@@ -92,15 +92,18 @@ function updateCalendarWithTasks(month, year) {
         ['morning', 'afternoon', 'evening'].forEach(period => {
           if (Array.isArray(dayTasks[period])) {
             dayTasks[period].forEach(task => {
-              const taskDiv = document.createElement("div");
-              taskDiv.classList.add(`task-${period}`);
-              taskDiv.style.backgroundColor = task.color;
-              taskDiv.textContent = task.task;
-              taskContainer.appendChild(taskDiv);
+              if (task.color) {
+                const taskDiv = document.createElement("div");
+                taskDiv.classList.add(`task-${period}`);
+                taskDiv.style.backgroundColor = task.color;
+                taskDiv.textContent = task.task || ""; // If task text is missing, leave blank
+                taskContainer.appendChild(taskDiv);
+              }
             });
           }
         });
       }
+      
 
       if (
         currentDay === todayVertView.getDate() &&
@@ -136,27 +139,27 @@ nextMonthBtnVertView.addEventListener("click", () => {
   updateCalendarWithTasks(currentMonthVertView, currentYearVertView);
 });
 
-// === ADJUST GRID HEIGHT BASED ON SCREEN SIZE ===
-function adjustGridHeight() {
-  const headerHeight = document.querySelector('.calendar-header-vert-view').offsetHeight;
-  const calendarContainerHeight = calendarContainerVertView.offsetHeight;
+// // === ADJUST GRID HEIGHT BASED ON SCREEN SIZE ===
+// function adjustGridHeight() {
+//   const headerHeight = document.querySelector('.calendar-header-vert-view').offsetHeight;
+//   const calendarContainerHeight = calendarContainerVertView.offsetHeight;
   
-  // Calculate remaining height after subtracting the header and other elements
-  const remainingHeight = calendarContainerHeight - headerHeight;
+//   // Calculate remaining height after subtracting the header and other elements
+//   const remainingHeight = calendarContainerHeight - headerHeight;
 
-  // Calculate the height of each row by dividing the remaining height by 6
-  const rowHeight = remainingHeight / 6;
+//   // Calculate the height of each row by dividing the remaining height by 6
+//   const rowHeight = remainingHeight / 6;
 
-  // Apply the calculated height to each day cell
-  const dayCells = daysGridVertView.children;
-  for (let i = 0; i < dayCells.length; i++) {
-    dayCells[i].style.height = `${rowHeight}px`;
-  }
-}
+//   // Apply the calculated height to each day cell
+//   const dayCells = daysGridVertView.children;
+//   for (let i = 0; i < dayCells.length; i++) {
+//     dayCells[i].style.height = `${rowHeight}px`;
+//   }
+// }
 
-// Call the function to adjust grid height initially and when the window is resized
-adjustGridHeight();
-window.addEventListener('resize', adjustGridHeight);
+// // Call the function to adjust grid height initially and when the window is resized
+// adjustGridHeight();
+// window.addEventListener('resize', adjustGridHeight);
 
 // === INITIAL SETUP ===
 createCalendarGrid();
