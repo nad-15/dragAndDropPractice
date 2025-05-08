@@ -54,6 +54,76 @@ function createCalendarGrid() {
 }
 
 // === UPDATE DAY CELLS ===
+// function updateCalendarWithTasks(month, year) {
+//   const tasks = loadTasksFromLocalStorage();
+//   const firstDayOfMonth = new Date(year, month, 1).getDay();
+//   const totalDaysInMonth = new Date(year, month + 1, 0).getDate();
+//   const totalDaysLastMonth = new Date(year, month, 0).getDate();
+
+//   const monthNames = [
+//     "January", "February", "March", "April", "May", "June",
+//     "July", "August", "September", "October", "November", "December"
+//   ];
+//   monthLabelVertView.textContent = `${monthNames[month]} ${year}`;
+
+//   const dayCells = daysGridVertView.children;
+
+//   for (let i = 0; i < 42; i++) {
+//     const cell = dayCells[i];
+//     const dayNumber = cell.querySelector(".day-number");
+//     const taskContainer = cell.querySelector(".task-container-vert-view");
+
+//     cell.classList.remove("adjacent-month-vert-view", "today-vert-view");
+//     taskContainer.innerHTML = "";
+
+//     let currentDay, dateKey;
+
+//     if (i < firstDayOfMonth) {
+//       currentDay = totalDaysLastMonth - firstDayOfMonth + 1 + i;
+//       dayNumber.textContent = currentDay;
+//       cell.classList.add("adjacent-month-vert-view");
+
+
+//     } else if (i < firstDayOfMonth + totalDaysInMonth) {
+//       currentDay = i - firstDayOfMonth + 1;
+//       dayNumber.textContent = currentDay;
+//       dateKey = `${year}-${month}-${currentDay}`;
+
+//       const dayTasks = tasks[dateKey];
+//       if (dayTasks) {
+//         ['morning', 'afternoon', 'evening'].forEach(period => {
+//           if (Array.isArray(dayTasks[period])) {
+//             dayTasks[period].forEach(task => {
+//               if (task.color) {
+//                 const taskDiv = document.createElement("div");
+//                 taskDiv.classList.add(`task-${period}`);
+//                 // taskDiv.style.backgroundColor = task.color;
+//                 taskDiv.style.borderLeft = `3px solid ${task.color}`;
+//                 taskDiv.style.backgroundColor = fadeColor(task.color); 
+//                 taskDiv.textContent = task.task || ""; // If task text is missing, leave blank
+//                 taskContainer.appendChild(taskDiv);
+//               }
+//             });
+//           }
+//         });
+//       }
+      
+
+//       if (
+//         currentDay === todayVertView.getDate() &&
+//         month === todayVertView.getMonth() &&
+//         year === todayVertView.getFullYear()
+//       ) {
+//         cell.classList.add("today-vert-view");
+//       }
+//     } else {
+//       currentDay = i - (firstDayOfMonth + totalDaysInMonth) + 1;
+//       dayNumber.textContent = currentDay;
+//       cell.classList.add("adjacent-month-vert-view");
+//     }
+//   }
+// }
+
 function updateCalendarWithTasks(month, year) {
   const tasks = loadTasksFromLocalStorage();
   const firstDayOfMonth = new Date(year, month, 1).getDay();
@@ -78,35 +148,24 @@ function updateCalendarWithTasks(month, year) {
 
     let currentDay, dateKey;
 
+    // === PREVIOUS MONTH ===
     if (i < firstDayOfMonth) {
       currentDay = totalDaysLastMonth - firstDayOfMonth + 1 + i;
       dayNumber.textContent = currentDay;
       cell.classList.add("adjacent-month-vert-view");
-    } else if (i < firstDayOfMonth + totalDaysInMonth) {
+
+      const prevMonth = month === 0 ? 11 : month - 1;
+      const prevYear = month === 0 ? year - 1 : year;
+      dateKey = `${prevYear}-${prevMonth}-${currentDay}`;
+    }
+
+    // === CURRENT MONTH ===
+    else if (i < firstDayOfMonth + totalDaysInMonth) {
       currentDay = i - firstDayOfMonth + 1;
       dayNumber.textContent = currentDay;
       dateKey = `${year}-${month}-${currentDay}`;
 
-      const dayTasks = tasks[dateKey];
-      if (dayTasks) {
-        ['morning', 'afternoon', 'evening'].forEach(period => {
-          if (Array.isArray(dayTasks[period])) {
-            dayTasks[period].forEach(task => {
-              if (task.color) {
-                const taskDiv = document.createElement("div");
-                taskDiv.classList.add(`task-${period}`);
-                // taskDiv.style.backgroundColor = task.color;
-                taskDiv.style.borderLeft = `3px solid ${task.color}`;
-                taskDiv.style.backgroundColor = fadeColor(task.color); 
-                taskDiv.textContent = task.task || ""; // If task text is missing, leave blank
-                taskContainer.appendChild(taskDiv);
-              }
-            });
-          }
-        });
-      }
-      
-
+      // Restore the "today" highlight
       if (
         currentDay === todayVertView.getDate() &&
         month === todayVertView.getMonth() &&
@@ -114,13 +173,41 @@ function updateCalendarWithTasks(month, year) {
       ) {
         cell.classList.add("today-vert-view");
       }
-    } else {
+    }
+
+    // === NEXT MONTH ===
+    else {
       currentDay = i - (firstDayOfMonth + totalDaysInMonth) + 1;
       dayNumber.textContent = currentDay;
       cell.classList.add("adjacent-month-vert-view");
+
+      const nextMonth = month === 11 ? 0 : month + 1;
+      const nextYear = month === 11 ? year + 1 : year;
+      dateKey = `${nextYear}-${nextMonth}-${currentDay}`;
+    }
+
+    // === TASK INJECTION (for all dates) ===
+    const dayTasks = tasks[dateKey];
+    if (dayTasks) {
+      ['morning', 'afternoon', 'evening'].forEach(period => {
+        if (Array.isArray(dayTasks[period])) {
+          dayTasks[period].forEach(task => {
+            if (task.color) {
+              const taskDiv = document.createElement("div");
+              taskDiv.classList.add(`task-${period}`);
+              taskDiv.style.borderLeft = `3px solid ${task.color}`;
+              taskDiv.style.backgroundColor = fadeColor(task.color);
+              taskDiv.textContent = task.task || "";
+              taskContainer.appendChild(taskDiv);
+            }
+          });
+        }
+      });
     }
   }
 }
+
+
 
 // === REMOVE THIS HELPER FUNCTION ONCE PUT IN SHCEDULER ===
 function fadeColor(color, alpha = 0.6) {
