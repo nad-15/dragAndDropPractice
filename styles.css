@@ -166,7 +166,7 @@
   height: 13px; /* Fix height */
   line-height: 13px; /* Vertically center text */
   width: 100%;
-  border: 1px solid var(--calendar-border);
+  /* border: 1px solid var(--calendar-border); */
   border-radius: 3px;
   box-sizing: border-box;
   padding: 0 2px; /* Optional small padding */
@@ -178,6 +178,9 @@
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+
+  border-left: 3px solid transparent; 
+  background-color: transparent;
 }
 
 

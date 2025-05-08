@@ -95,7 +95,9 @@ function updateCalendarWithTasks(month, year) {
               if (task.color) {
                 const taskDiv = document.createElement("div");
                 taskDiv.classList.add(`task-${period}`);
-                taskDiv.style.backgroundColor = task.color;
+                // taskDiv.style.backgroundColor = task.color;
+                taskDiv.style.borderLeft = `3px solid ${task.color}`;
+                taskDiv.style.backgroundColor = fadeColor(task.color); 
                 taskDiv.textContent = task.task || ""; // If task text is missing, leave blank
                 taskContainer.appendChild(taskDiv);
               }
@@ -119,6 +121,21 @@ function updateCalendarWithTasks(month, year) {
     }
   }
 }
+
+// === REMOVE THIS HELPER FUNCTION ONCE PUT IN SHCEDULER ===
+function fadeColor(color, alpha = 0.6) {
+  // If color is in rgb format, return it with the alpha applied
+  if (color.startsWith('rgb')) {
+      return color.replace(')', `, ${alpha})`).replace('rgba', 'rgb');
+  }
+
+  // Otherwise, treat it as a hex color and convert to rgba
+  const r = parseInt(color.substr(1, 2), 16);
+  const g = parseInt(color.substr(3, 2), 16);
+  const b = parseInt(color.substr(5, 2), 16);
+  return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+}
+
 
 // === NAVIGATION ===
 prevMonthBtnVertView.addEventListener("click", () => {
