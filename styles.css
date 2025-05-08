@@ -27,6 +27,7 @@
 
 /* Calendar Container */
 .calendar-container-vert-view {
+
   position: fixed;
   top: 0;
   left: 0;
@@ -37,7 +38,9 @@
   flex-direction: column;
   z-index: 1000;
   box-sizing: border-box;
-  overflow: hidden;  /* Prevent overflow */
+  /* overflow: hidden;  */
+  overflow-y: auto; 
+
 }
 
 /* Header */
@@ -84,7 +87,7 @@
 
 /* Days Grid */
 .days-grid-vert-view {
-  
+  /* background: red; */
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   grid-template-rows: repeat(6, 1fr);
@@ -92,7 +95,8 @@
   border-top: 2px solid var(--calendar-border);
   border-bottom: 2px solid var(--calendar-border);
   border-collapse: collapse;
-  overflow-y: auto;  /* Makes the grid scrollable */
+   /* Makes the grid scrollable */
+  /* overflow-y: auto;  */
   flex-grow: 1;  /* Allow it to grow and fill available space */
 }
 
