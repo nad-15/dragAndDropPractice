@@ -162,7 +162,7 @@
 .task-afternoon,
 .task-evening {
   font-family: monospace;
-  font-size: 12px;
+  font-size: 10px;
   height: 13px; /* Fix height */
   line-height: 13px; /* Vertically center text */
   width: 100%;
