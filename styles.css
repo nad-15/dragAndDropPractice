@@ -51,7 +51,7 @@
   background: var(--calendar-header-bg);
   padding: 0.5rem 1rem;
   border-radius: 10px;
-  margin-bottom: 0.5rem;
+  /* margin-bottom: 0.5rem; */
 }
 
 .month-label-vert-view {
@@ -74,7 +74,7 @@
   grid-template-columns: repeat(7, 1fr);
   text-align: center;
   font-weight: bold;
-  padding: 0.25rem 0;
+  /* padding: 0.25rem 0; */
   color: var(--calendar-text);
 }
 
@@ -163,6 +163,7 @@
 .task-evening {
   font-family: monospace;
   font-size: 10px;
+  font-weight: bold;
   height: 13px; /* Fix height */
   line-height: 13px; /* Vertically center text */
   width: 100%;
