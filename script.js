@@ -6,6 +6,18 @@ const monthLabelVertView = document.getElementById("month-label-vert-view");
 const prevMonthBtnVertView = document.getElementById("prev-month-vert-view");
 const nextMonthBtnVertView = document.getElementById("next-month-vert-view");
 
+
+// === RESIZE THE CALENDAR VIEW MINUS THE ADDRESS BAR ===
+function adjustCalendarHeight() {
+  calendarContainerVertView.style.height = `${window.innerHeight}px`;
+}
+
+// Call initially and on resize
+adjustCalendarHeight();
+window.addEventListener('resize', adjustCalendarHeight);
+
+
+
 // === TIME VARIABLES ===
 let todayVertView = new Date(new Date().toLocaleString('en-US', { timeZone: 'America/Toronto' }));
 let currentMonthVertView = todayVertView.getMonth();
