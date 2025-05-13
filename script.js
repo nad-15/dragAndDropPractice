@@ -10,6 +10,7 @@ const nextMonthBtnVertView = document.getElementById("next-month-vert-view");
 // === RESIZE THE CALENDAR VIEW MINUS THE ADDRESS BAR ===
 function adjustCalendarHeight() {
   calendarContainerVertView.style.height = `${window.innerHeight}px`;
+  calendarContainerVertView.style.maxHeight = `${window.innerHeight}px`;
 }
 
 // Call initially and on resize

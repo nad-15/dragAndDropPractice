@@ -40,6 +40,7 @@
   box-sizing: border-box;
   /* overflow: hidden;  */
   overflow-y: auto; 
+  scrollbar-width: none;
 
 }
 
@@ -98,6 +99,7 @@
    /* Makes the grid scrollable */
   /* overflow-y: auto;  */
   flex-grow: 1;  /* Allow it to grow and fill available space */
+  overflow: hidden;
 }
 
 /* Cell Style */
