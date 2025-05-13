@@ -206,11 +206,13 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 400px;
+  width: 95%;
   max-height: 90vh;
   overflow-y: auto;
-  background-color: #1f1f1f;
+  /* background-color: #1f1f1f; */
+  background-color:white;
   color: white;
+  color: black;
   border-radius: 12px;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
   padding: 20px;

@@ -88,10 +88,15 @@ function showDayTasks(e) {
         periodTasks.forEach(({ task, color }) => {
           const item = document.createElement("div");
           item.className = "event";
-          item.innerHTML = `
-            <span class="event-title" style="color:${color}; font-weight:bold">${task}</span>
-            <span class="event-date">${period}</span>
-          `;
+item.innerHTML = `
+  <div style="border-left: 5px solid ${color}; padding: 5px 10px; margin-bottom: 10px; border-radius: 4px;">
+    <span class="event-title" style="color: black; font-weight:bold">${task || "No Title"}</span>
+  </div>
+`;
+
+
+
+
           section.appendChild(item);
         });
 
