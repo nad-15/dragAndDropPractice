@@ -216,9 +216,19 @@
   border-radius: 12px;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
   padding: 20px;
-  z-index: 1000;
+  z-index: 2000;
 }
 
+.backdrop {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.6); /* Dark overlay */
+  z-index: 1999; /* Just below the popup */
+}
 
 
 /* Optional: Scroll fix for short screens */

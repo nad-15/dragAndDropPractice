@@ -113,7 +113,9 @@ item.innerHTML = `
   }
 
   // Show the popup
-  document.getElementById("calendar-pop-up").style.display = "block";
+document.getElementById("calendar-pop-up").style.display = "block";
+document.getElementById("backdrop").style.display = "block";
+
 }
 
 
@@ -121,7 +123,14 @@ item.innerHTML = `
 // === CLOSE FUNCITONALITY FOR POP UP
 document.getElementById("closePopupBtn").addEventListener("click", () => {
   document.getElementById("calendar-pop-up").style.display = "none";
+  document.getElementById("backdrop").style.display = "none";
 });
+
+document.getElementById("backdrop").addEventListener("click", () => {
+  document.getElementById("calendar-pop-up").style.display = "none";
+  document.getElementById("backdrop").style.display = "none";
+});
+
 
   // === SET MAX HEIGHT for each task container after DOM elements are in place
   const allDayCells = daysGridVertView.querySelectorAll(".day-vert-view");
