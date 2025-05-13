@@ -7,6 +7,10 @@ const prevMonthBtnVertView = document.getElementById("prev-month-vert-view");
 const nextMonthBtnVertView = document.getElementById("next-month-vert-view");
 
 
+
+
+
+
 // === RESIZE THE CALENDAR VIEW MINUS THE ADDRESS BAR ===
 function adjustCalendarHeight() {
   calendarContainerVertView.style.height = `${window.innerHeight}px`;
@@ -40,6 +44,7 @@ function createCalendarGrid() {
   for (let i = 0; i < 42; i++) {
     const dayCell = document.createElement("div");
     dayCell.classList.add("day-vert-view");
+    dayCell.addEventListener(`click`, showDayTasks);
 
     const dayNumber = document.createElement("div");
     dayNumber.classList.add("day-number");
@@ -51,6 +56,60 @@ function createCalendarGrid() {
     dayCell.appendChild(taskContainer);
     daysGridVertView.appendChild(dayCell);
   }
+// === SHOW POP UP FOR THE DAY ===
+function showDayTasks(e) {
+  const dayElement = e.target.closest('.day-vert-view');
+  const date = dayElement.dataset.fullDate; // e.g., "2025-5-1"
+
+  // Get tasks object from localStorage
+  const storedTasks = JSON.parse(localStorage.getItem("tasks")) || {};
+  const dayTasks = storedTasks[date];
+
+  // Format and display the readable date
+  const readable = new Date(date).toLocaleDateString('en-US', {
+    weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
+  });
+  document.getElementById("popup-date").textContent = readable;
+
+  // Clear old tasks
+  const popupTasks = document.getElementById("popup-tasks");
+  popupTasks.innerHTML = "";
+
+  if (!dayTasks) {
+    popupTasks.innerHTML = "<p>No tasks for this day.</p>";
+  } else {
+    const periods = ["morning", "afternoon", "evening"];
+    periods.forEach(period => {
+      const periodTasks = dayTasks[period];
+      if (periodTasks && periodTasks.length > 0) {
+        const section = document.createElement("div");
+        section.innerHTML = `<h3 style="margin-top:10px;">${period.charAt(0).toUpperCase() + period.slice(1)}</h3>`;
+        
+        periodTasks.forEach(({ task, color }) => {
+          const item = document.createElement("div");
+          item.className = "event";
+          item.innerHTML = `
+            <span class="event-title" style="color:${color}; font-weight:bold">${task}</span>
+            <span class="event-date">${period}</span>
+          `;
+          section.appendChild(item);
+        });
+
+        popupTasks.appendChild(section);
+      }
+    });
+  }
+
+  // Show the popup
+  document.getElementById("calendar-pop-up").style.display = "block";
+}
+
+
+
+// === CLOSE FUNCITONALITY FOR POP UP
+document.getElementById("closePopupBtn").addEventListener("click", () => {
+  document.getElementById("calendar-pop-up").style.display = "none";
+});
 
   // === SET MAX HEIGHT for each task container after DOM elements are in place
   const allDayCells = daysGridVertView.querySelectorAll(".day-vert-view");
@@ -67,7 +126,6 @@ function createCalendarGrid() {
     taskContainer.style.maxHeight = `${availableHeight}px`;
   });
 }
-
 
 function updateCalendarWithTasks(month, year) {
   const tasks = loadTasksFromLocalStorage();
@@ -102,6 +160,8 @@ function updateCalendarWithTasks(month, year) {
       const prevMonth = month === 0 ? 11 : month - 1;
       const prevYear = month === 0 ? year - 1 : year;
       dateKey = `${prevYear}-${prevMonth}-${currentDay}`;
+      cell.setAttribute("data-full-date", dateKey);
+
     }
 
     // === CURRENT MONTH ===
@@ -109,6 +169,8 @@ function updateCalendarWithTasks(month, year) {
       currentDay = i - firstDayOfMonth + 1;
       dayNumber.textContent = currentDay;
       dateKey = `${year}-${month}-${currentDay}`;
+      cell.setAttribute("data-full-date", dateKey);
+
 
       // Restore the "today" highlight
       if (
@@ -129,6 +191,8 @@ function updateCalendarWithTasks(month, year) {
       const nextMonth = month === 11 ? 0 : month + 1;
       const nextYear = month === 11 ? year + 1 : year;
       dateKey = `${nextYear}-${nextMonth}-${currentDay}`;
+      cell.setAttribute("data-full-date", dateKey);
+
     }
 
     // === TASK INJECTION (for all dates) ===
@@ -188,27 +252,7 @@ nextMonthBtnVertView.addEventListener("click", () => {
   updateCalendarWithTasks(currentMonthVertView, currentYearVertView);
 });
 
-// // === ADJUST GRID HEIGHT BASED ON SCREEN SIZE ===
-// function adjustGridHeight() {
-//   const headerHeight = document.querySelector('.calendar-header-vert-view').offsetHeight;
-//   const calendarContainerHeight = calendarContainerVertView.offsetHeight;
-  
-//   // Calculate remaining height after subtracting the header and other elements
-//   const remainingHeight = calendarContainerHeight - headerHeight;
 
-//   // Calculate the height of each row by dividing the remaining height by 6
-//   const rowHeight = remainingHeight / 6;
-
-//   // Apply the calculated height to each day cell
-//   const dayCells = daysGridVertView.children;
-//   for (let i = 0; i < dayCells.length; i++) {
-//     dayCells[i].style.height = `${rowHeight}px`;
-//   }
-// }
-
-// // Call the function to adjust grid height initially and when the window is resized
-// adjustGridHeight();
-// window.addEventListener('resize', adjustGridHeight);
 
 // === INITIAL SETUP ===
 createCalendarGrid();
