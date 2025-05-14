@@ -63,7 +63,7 @@ function createCalendarGrid() {
     dayCell.appendChild(taskContainer);
     daysGridVertView.appendChild(dayCell);
   }
-// === SHOW POP UP FOR THE DAY ===
+  // === SHOW POP UP FOR THE DAY ===
 function showDayTasks(e) {
   const dayElement = e.target.closest('.day-vert-view');
   const date = dayElement.dataset.fullDate; // e.g., "2025-5-1"
@@ -72,10 +72,14 @@ function showDayTasks(e) {
   const storedTasks = JSON.parse(localStorage.getItem("tasks")) || {};
   const dayTasks = storedTasks[date];
 
-  // Format and display the readable date
-  const readable = new Date(date).toLocaleDateString('en-US', {
+  // Adjust date and format
+  const dateObj = new Date(date);
+  dateObj.setMonth(dateObj.getMonth() + 1); // Add 1 to the month
+
+  const readable = dateObj.toLocaleDateString('en-US', {
     weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
   });
+
   document.getElementById("popup-date").textContent = readable;
 
   // Clear old tasks
@@ -88,48 +92,54 @@ function showDayTasks(e) {
     const periods = ["morning", "afternoon", "evening"];
     periods.forEach(period => {
       const periodTasks = dayTasks[period];
+
+      const section = document.createElement("div");
+      section.innerHTML = `
+        <h3 style="margin-top:10px;">${period.charAt(0).toUpperCase() + period.slice(1)}</h3>
+        <hr style="border: none; border-top: 1px dashed #aaa; margin: 5px 0 10px 0;">
+      `;
+
       if (periodTasks && periodTasks.length > 0) {
-        const section = document.createElement("div");
-        section.innerHTML = `<h3 style="margin-top:10px;">${period.charAt(0).toUpperCase() + period.slice(1)}</h3>`;
-        
         periodTasks.forEach(({ task, color }) => {
           const item = document.createElement("div");
           item.className = "event";
-item.innerHTML = `
-  <div style="border-left: 5px solid ${color}; padding: 5px 10px; margin-bottom: 10px; border-radius: 4px;">
-    <span class="event-title" style="color: black; font-weight:bold">${task || "No Title"}</span>
-  </div>
-`;
-
-
-
-
+          item.innerHTML = `
+            <div style="border-left: 5px solid ${color}; padding: 5px 10px; margin-bottom: 10px; border-radius: 4px;">
+              <span class="event-title" style="color: black; font-weight:bold">${task || "No Title"}</span>
+            </div>
+          `;
           section.appendChild(item);
         });
-
-        popupTasks.appendChild(section);
+      } else {
+        const noTask = document.createElement("p");
+        noTask.textContent = "No tasks for this period.";
+        noTask.style.color = "#777";
+        noTask.style.margin = "5px 10px";
+        section.appendChild(noTask);
       }
+
+      popupTasks.appendChild(section);
     });
   }
 
   // Show the popup
-document.getElementById("calendar-pop-up").style.display = "block";
-document.getElementById("backdrop").style.display = "block";
-
+  document.getElementById("calendar-pop-up").style.display = "block";
+  document.getElementById("backdrop").style.display = "block";
 }
 
 
 
-// === CLOSE FUNCITONALITY FOR POP UP
-document.getElementById("closePopupBtn").addEventListener("click", () => {
-  document.getElementById("calendar-pop-up").style.display = "none";
-  document.getElementById("backdrop").style.display = "none";
-});
 
-document.getElementById("backdrop").addEventListener("click", () => {
-  document.getElementById("calendar-pop-up").style.display = "none";
-  document.getElementById("backdrop").style.display = "none";
-});
+  // === CLOSE FUNCITONALITY FOR POP UP
+  document.getElementById("closePopupBtn").addEventListener("click", () => {
+    document.getElementById("calendar-pop-up").style.display = "none";
+    document.getElementById("backdrop").style.display = "none";
+  });
+
+  document.getElementById("backdrop").addEventListener("click", () => {
+    document.getElementById("calendar-pop-up").style.display = "none";
+    document.getElementById("backdrop").style.display = "none";
+  });
 
 
   // === SET MAX HEIGHT for each task container after DOM elements are in place
@@ -243,7 +253,7 @@ function updateCalendarWithTasks(month, year) {
 function fadeColor(color, alpha = 0.6) {
   // If color is in rgb format, return it with the alpha applied
   if (color.startsWith('rgb')) {
-      return color.replace(')', `, ${alpha})`).replace('rgba', 'rgb');
+    return color.replace(')', `, ${alpha})`).replace('rgba', 'rgb');
   }
 
   // Otherwise, treat it as a hex color and convert to rgba
