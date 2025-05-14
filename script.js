@@ -109,24 +109,38 @@ function createCalendarGrid() {
 
 
         const periodTasks = dayTasks[period];
-        if (periodTasks && periodTasks.length > 0) {
-          periodTasks.forEach(({ task, color }) => {
-            const eventDiv = document.createElement("div");
-            eventDiv.className = "event";
+if (periodTasks && periodTasks.length > 0) {
+  periodTasks.forEach(({ task, color }) => {
+    const eventDiv = document.createElement("div");
+    eventDiv.className = "event";
 
-            const content = document.createElement("div");
-            content.className = "event-content";
-            content.style.borderLeft = `5px solid ${color}`;
+    const content = document.createElement("div");
+    content.className = "event-content";
 
-            const title = document.createElement("span");
-            title.className = "event-title";
-            title.textContent = task || "No Title";
+    const title = document.createElement("span");
+    title.className = "event-title";
 
-            content.appendChild(title);
-            eventDiv.appendChild(content);
-            section.appendChild(eventDiv);
-          });
-        } else {
+    const hasText = task && task.trim() !== "";
+    const hasColor = color && color.trim() !== "";
+
+    if (hasText && hasColor) {
+      content.style.borderLeft = `5px solid ${color}`;
+      title.textContent = task;
+    } else if (!hasText && hasColor) {
+      content.style.borderLeft = `5px solid ${color}`;
+      title.textContent = "No Title";
+    } else {
+      // No text and no color
+      content.style.borderLeft = "none";
+      title.textContent = "No Task";
+    }
+
+    content.appendChild(title);
+    eventDiv.appendChild(content);
+    section.appendChild(eventDiv);
+  });
+}
+else {
           const noTask = document.createElement("p");
           noTask.className = "no-tasks-text";
           noTask.textContent = "No tasks for this period.";
