@@ -242,9 +242,8 @@
   font-size: 1.2rem;
   /* width: 100%; */
   font-weight: bold;
-
   display: inline-block;
-  color: #333;
+  color: black;
   /* border-bottom: 2px solid #ccc; */
   /* padding-bottom: 5px; */
 }
@@ -268,7 +267,9 @@
 
 .period-section {
   margin-bottom: 20px;
-        font-size: 1.2rem;
+  font-size: 1.2rem;
+  color: #333;
+
 }
 
 .dashed-line {
@@ -279,8 +280,7 @@
 
 .event-content {
   /* background-color: red; */
-      font-size: 1rem;
-
+  font-size: 1rem;
   padding: 5px 10px;
   margin-left: 20px;
   margin-bottom: 10px;
@@ -289,7 +289,7 @@
 
 .event-title {
   color: black;
-  font-weight: bold;
+  /* font-weight: bold; */
 }
 
 .no-tasks-text {
