@@ -245,6 +245,17 @@
   color: black;
 }
 
+#popup-date .weekday {
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+#popup-date .month-year {
+  font-size: 0.85em;
+  color: black;
+}
+
+
 #closePopupBtn {
   border: transparent;
   background-color: transparent;
