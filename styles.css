@@ -215,8 +215,8 @@
   left: 50%;
   transform: translate(-50%, -50%);
   width: 95%;
-  max-height: 90vh;
-  /* overflow-y: auto; */
+  /* max-height: 90vh; */
+  overflow-y: auto;
   /* background-color: #1f1f1f; */
   background-color: white;
   color: white;
@@ -224,22 +224,26 @@
   border-radius: 12px;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
   padding: 20px;
+  padding-top: 0px;
   z-index: 2000;
 }
 
 .popup-header {
-  /* background-color: red; */
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background-color: white; /* Needed so it doesn't become transparent */
   display: flex;
   justify-content: space-between;
-  /* align-items: center;           */
   width: 100%;
   border-bottom: 2px solid #ccc;
-  margin-bottom: 15px;
   padding-bottom: 5px;
+  padding-top: 20px;
 }
 
+
 #popup-date {
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   /* width: 100%; */
   font-weight: bold;
   display: inline-block;
@@ -259,9 +263,8 @@
 .popup-tasks {
   /* background-color: red; */
   margin: 2px;
-  overflow-y: auto;
-  scrollbar-width: none;
-  overflow: hidden ;
+  height: 100%;
+
 }
 
 
