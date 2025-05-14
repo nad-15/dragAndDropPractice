@@ -220,6 +220,37 @@
   z-index: 2000;
 }
 
+#popup-date {
+
+}
+
+.period-section {
+  margin-bottom: 20px;
+}
+
+.dashed-line {
+  border: none;
+  border-top: 1px dashed #aaa;
+  margin: 5px 0 10px 0;
+}
+
+.event-content {
+  padding: 5px 10px;
+  margin-bottom: 10px;
+  border-radius: 4px;
+}
+
+.event-title {
+  color: black;
+  font-weight: bold;
+}
+
+.no-tasks-text {
+  color: #777;
+  margin: 5px 10px;
+}
+
+
 .backdrop {
   display: none;
   position: fixed;
