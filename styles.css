@@ -239,7 +239,7 @@
 }
 
 #popup-date {
-  font-size: 20.8px; /* 1.3rem */
+  font-size: 15px; /* 1.3rem */
   font-weight: bold;
   display: inline-block;
   color: black;
@@ -259,7 +259,7 @@
 
 .period-section {
   margin-bottom: 20px;
-  font-size: 19.2px; /* 1.2rem */
+  font-size: 14px; /* 1.2rem */
   color: #333;
 }
 
@@ -270,7 +270,7 @@
 }
 
 .event-content {
-  font-size: 16px; /* 1rem */
+  font-size: 12px; /* 1rem */
   padding: 5px 10px;
   margin-left: 20px;
   margin-bottom: 10px;
