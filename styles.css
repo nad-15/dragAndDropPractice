@@ -239,7 +239,7 @@
 }
 
 #popup-date {
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   /* width: 100%; */
   font-weight: bold;
 
@@ -257,9 +257,18 @@
 }
 
 
+.popup-tasks {
+  /* background-color: red; */
+  margin: 2px;
+  overflow-y: auto;
+  scrollbar-width: none;
+  overflow: hidden ;
+}
+
 
 .period-section {
   margin-bottom: 20px;
+        font-size: 1.2rem;
 }
 
 .dashed-line {
@@ -269,7 +278,11 @@
 }
 
 .event-content {
+  /* background-color: red; */
+      font-size: 1rem;
+
   padding: 5px 10px;
+  margin-left: 20px;
   margin-bottom: 10px;
   border-radius: 4px;
 }
