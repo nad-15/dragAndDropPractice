@@ -18,7 +18,7 @@ function adjustCalendarHeight() {
   // Adjust popup max-height as well
   const popup = document.getElementById("calendar-pop-up");
   if (popup) {
-    popup.style.maxHeight = `${window.innerHeight * 0.5}px`;
+    popup.style.maxHeight = `${window.innerHeight * 0.8}px`;
   }
 }
 
