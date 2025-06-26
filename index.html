@@ -3,17 +3,86 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Simple Drag Sort</title>
-  <link rel="stylesheet" href="styles.css">
+  <title>Task Drag Demo</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background: #f2f2f2;
+      padding: 2rem;
+    }
+
+    #popup-tasks {
+      background: white;
+      padding: 1rem;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      width: 350px;
+      margin: 0 auto;
+    }
+
+    .period-section {
+      margin-bottom: 1.5rem;
+      padding: 1rem;
+      background: #f9f9f9;
+      border-radius: 6px;
+    }
+
+    .section-divider {
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+      color: #444;
+    }
+
+    .event {
+      background: white;
+      padding: 10px 12px;
+      border: 1px solid #ccc;
+      border-left: 5px solid steelblue;
+      border-radius: 4px;
+      margin-bottom: 8px;
+      user-select: none;
+      touch-action: none;
+      cursor: grab;
+    }
+
+    .event.dragging {
+      visibility: hidden;
+    }
+
+    .ghost {
+      opacity: 0.8;
+      pointer-events: none;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      transform: scale(1.05);
+      transition: none !important;
+      position: absolute;
+      z-index: 1000;
+    }
+  </style>
 </head>
 <body>
-  <div class="container" id="sortable">
-    <div class="item">Item 1</div>
-    <div class="item">Item 2</div>
-    <div class="item">Item 3</div>
-    <div class="item">Item 4</div>
-    <div class="item">Item 5</div>
+
+  <div id="popup-tasks">
+    <div class="period-section sortable">
+      <div class="section-divider">Morning</div>
+      <div class="event">☀️ Wake up</div>
+      <div class="event">🧘 Morning exercise</div>
+      <div class="event">🥞 Breakfast</div>
+    </div>
+
+    <div class="period-section sortable">
+      <div class="section-divider">Afternoon</div>
+      <div class="event">💻 Work on project</div>
+      <div class="event">📞 Call client</div>
+    </div>
+
+    <div class="period-section sortable">
+      <div class="section-divider">Evening</div>
+      <div class="event">🍽️ Dinner</div>
+      <div class="event">📺 Watch show</div>
+    </div>
   </div>
+
   <script src="script.js"></script>
 </body>
 </html>
