@@ -4,82 +4,41 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Task Drag Demo</title>
-  <style>
-    body {
-      font-family: sans-serif;
-      background: #f2f2f2;
-      padding: 2rem;
-    }
-
-    #popup-tasks {
-      background: white;
-      padding: 1rem;
-      border-radius: 8px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-      width: 350px;
-      margin: 0 auto;
-    }
-
-    .period-section {
-      margin-bottom: 1.5rem;
-      padding: 1rem;
-      background: #f9f9f9;
-      border-radius: 6px;
-    }
-
-    .section-divider {
-      font-weight: bold;
-      margin-bottom: 0.5rem;
-      color: #444;
-    }
-
-    .event {
-      background: white;
-      padding: 10px 12px;
-      border: 1px solid #ccc;
-      border-left: 5px solid steelblue;
-      border-radius: 4px;
-      margin-bottom: 8px;
-      user-select: none;
-      touch-action: none;
-      cursor: grab;
-    }
-
-    .event.dragging {
-      visibility: hidden;
-    }
-
-    .ghost {
-      opacity: 0.8;
-      pointer-events: none;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-      transform: scale(1.05);
-      transition: none !important;
-      position: absolute;
-      z-index: 1000;
-    }
-  </style>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
 
-  <div id="popup-tasks">
-    <div class="period-section sortable">
-      <div class="section-divider">Morning</div>
-      <div class="event">☀️ Wake up</div>
-      <div class="event">🧘 Morning exercise</div>
-      <div class="event">🥞 Breakfast</div>
+  <div id="calendar-pop-up">
+    <div class="popup-header">
+      <div id="popup-date">
+        <div class="weekday">Today</div>
+        <div class="month-year">June 26</div>
+      </div>
     </div>
 
-    <div class="period-section sortable">
-      <div class="section-divider">Afternoon</div>
-      <div class="event">💻 Work on project</div>
-      <div class="event">📞 Call client</div>
-    </div>
+    <div class="popup-content-scroll">
+      <div class="popup-tasks" id="popup-tasks">
 
-    <div class="period-section sortable">
-      <div class="section-divider">Evening</div>
-      <div class="event">🍽️ Dinner</div>
-      <div class="event">📺 Watch show</div>
+        <div class="period-section sortable">
+          <div class="section-divider">Morning</div>
+          <div class="event"><div class="event-content"><span class="event-title">Wake up</span></div></div>
+          <div class="event"><div class="event-content"><span class="event-title">Morning exercise</span></div></div>
+          <div class="event"><div class="event-content"><span class="event-title">Breakfast</span></div></div>
+        </div>
+
+        <div class="period-section sortable">
+          <div class="section-divider">Afternoon</div>
+          <div class="event"><div class="event-content"><span class="event-title">Work on project</span></div></div>
+          <div class="event"><div class="event-content"><span class="event-title">Call client</span></div></div>
+        </div>
+
+        <div class="period-section sortable">
+          <div class="section-divider">Evening</div>
+          <div class="event"><div class="event-content"><span class="event-title">Dinner</span></div></div>
+          <div class="event"><div class="event-content"><span class="event-title">Watch show</span></div></div>
+        </div>
+
+      </div>
     </div>
   </div>
 

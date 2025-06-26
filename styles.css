@@ -1,49 +1,175 @@
-body {
-  display: flex;
-  justify-content: center;
-  padding: 50px;
-  background: #f0f0f0;
-  font-family: sans-serif;
+
+/* 
+    body {
+      font-family: sans-serif;
+      background: #f2f2f2;
+      padding: 2rem;
+    }
+
+    #popup-tasks {
+      background: white;
+      padding: 1rem;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      width: 350px;
+      margin: 0 auto;
+    }
+
+    .period-section {
+      margin-bottom: 1.5rem;
+      padding: 1rem;
+      background: #f9f9f9;
+      border-radius: 6px;
+    }
+
+    .section-divider {
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+      color: #444;
+    }
+
+    .event {
+      background: white;
+      padding: 10px 12px;
+      border: 1px solid #ccc;
+      border-left: 5px solid steelblue;
+      border-radius: 4px;
+      margin-bottom: 8px;
+      user-select: none;
+      touch-action: none;
+      cursor: grab;
+    }
+
+    .event.dragging {
+      visibility: hidden;
+    }
+
+    .ghost {
+      opacity: 0.8;
+      pointer-events: none;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      transform: scale(1.05);
+      transition: none !important;
+      position: absolute;
+      z-index: 1000;
+    }
+
+ */
+
+/* STYLES FOR POPUP AND DRAGGABLE TASKS */
+
+#calendar-pop-up {
+  display: block;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 70%;
+  overflow: hidden;
+  background-color: white;
+  color: black;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
+  padding: 20px;
+  padding-top: 0px;
+  z-index: 2000;
 }
 
-.container {
-  border: 2px solid red;
-  width: 300px;
+.popup-header {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background-color: transparent;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding-bottom: 5px;
+  padding-top: 20px;
+}
+
+#popup-date {
+  font-size: 15px;
+  font-weight: bold;
+  display: inline-block;
+  color: black;
+}
+
+#popup-date .weekday {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+#popup-date .month-year {
+  font-size: 0.8rem;
+  color: black;
+}
+
+.popup-content-scroll {
+  overflow-y: auto;
+  height: 86%;
+  width: 100%;
+  padding-top: 0;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  scrollbar-width: none;
+}
+
+.popup-tasks {
+  display: flex;
+  flex-direction: column;
+  margin: 2px;
+  flex-grow: 1;
+}
+
+.period-section {
+  font-size: 14px;
+  color: #333;
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  background: #f9f9f9;
+  border-radius: 6px;
+}
+
+.dashed-line {
+  border: none;
+  border-top: 1px dashed #aaa;
+  margin: 5px 0 10px 0;
+}
+
+.section-divider {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  color: #aaa;
+  font-weight: bold;
+  margin-bottom: 10px;
+  font-size: 0.8rem;
+  justify-content: center;
   position: relative;
 }
 
-.item {
+.section-divider::before,
+.section-divider::after {
+  content: '';
+  flex: 1;
+  border-top: 1px solid #aaa;
+  margin: 0 10px;
+}
+
+.event {
   background: white;
-  padding: 16px;
+  padding: 10px 12px;
   border: 1px solid #ccc;
-  border-radius: 5px;
+  border-left: 5px solid steelblue;
+  border-radius: 4px;
+  margin-bottom: 8px;
   user-select: none;
   touch-action: none;
-  transition: background 0.2s ease;
+  cursor: grab;
 }
 
-.item.dragging {
+.event.dragging {
   visibility: hidden;
-}
-
-/* .ghost {
-  position: absolute;
-  pointer-events: none;
-  opacity: 0.9;
-  background: #fff;
-  border: 1px solid #aaa;
-  border-radius: 5px;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-  z-index: 1000;
-}
- */
-
-
- .dragging {
-  opacity: 0.3;
 }
 
 .ghost {
@@ -52,4 +178,30 @@ body {
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
   transform: scale(1.05);
   transition: none !important;
+  position: absolute;
+  z-index: 10000;
+}
+
+.event-content {
+  font-size: 12px;
+  padding: 5px 10px;
+  margin-left: 20px;
+  margin-bottom: 10px;
+}
+
+.event-title {
+  color: black;
+}
+
+.event-content.no-tasks-for-this-period {
+  padding-left: 0px;
+}
+
+.no-tasks-text {
+  color: #777;
+  font-size: 12px;
+  padding: 5px 10px;
+  margin-left: 20px;
+  margin-bottom: 10px;
+  padding-left: 0px;
 }
