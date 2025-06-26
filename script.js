@@ -187,22 +187,18 @@
 
 
 // NEW
-
 const container = document.getElementById('sortable');
-
 let draggedItem = null;
 let ghost = null;
 let offsetY = 0;
 let dragTimeout = null;
 let startY = 0;
 let draggingStarted = false;
-let hasStartedDragging = false;
 let isTouch = false;
 let animationFrameId = null;
 
-// Start dragging
+// Drag start logic
 function startDragging(x, y, target) {
-  hasStartedDragging = true;
   draggedItem = target;
 
   const rect = target.getBoundingClientRect();
@@ -230,7 +226,7 @@ function startDragging(x, y, target) {
   target.classList.add('dragging');
 }
 
-// Move ghost throttled
+// Throttled move
 function moveGhostThrottled(y) {
   if (animationFrameId) return;
   animationFrameId = requestAnimationFrame(() => {
@@ -254,24 +250,15 @@ function moveGhost(y) {
 }
 
 function endDragging() {
-  if (dragTimeout) {
-    clearTimeout(dragTimeout);
-    dragTimeout = null;
-  }
-
-  if (!hasStartedDragging) return;
-  hasStartedDragging = false;
+  clearTimeout(dragTimeout);
   draggingStarted = false;
 
   if (draggedItem) {
     draggedItem.classList.remove('dragging');
     draggedItem = null;
   }
-
   if (ghost) {
-    try {
-      ghost.remove();
-    } catch {}
+    ghost.remove();
     ghost = null;
   }
 }
@@ -285,7 +272,6 @@ function handlePointerDown(e) {
 
   startY = e.clientY;
   draggingStarted = false;
-  hasStartedDragging = false;
 
   dragTimeout = setTimeout(() => {
     startDragging(e.clientX, e.clientY, target);
@@ -295,7 +281,6 @@ function handlePointerDown(e) {
 function handlePointerMove(e) {
   if (!draggingStarted && Math.abs(e.clientY - startY) > 10) {
     clearTimeout(dragTimeout);
-    dragTimeout = null;
     draggingStarted = true;
   }
 
@@ -309,7 +294,7 @@ function handlePointerUp() {
 // Touch Events
 function handleTouchStart(e) {
   isTouch = true;
-  setTimeout(() => isTouch = false, 1000);
+  setTimeout(() => isTouch = false, 1000); // reset flag
 
   const touch = e.touches[0];
   const target = e.target.closest('.item');
@@ -317,7 +302,6 @@ function handleTouchStart(e) {
 
   startY = touch.clientY;
   draggingStarted = false;
-  hasStartedDragging = false;
 
   dragTimeout = setTimeout(() => {
     startDragging(touch.clientX, touch.clientY, target);
@@ -328,7 +312,6 @@ function handleTouchMove(e) {
   const touch = e.touches[0];
   if (!draggingStarted && Math.abs(touch.clientY - startY) > 10) {
     clearTimeout(dragTimeout);
-    dragTimeout = null;
     draggingStarted = true;
   }
 
@@ -349,9 +332,7 @@ document.addEventListener('dragstart', e => e.preventDefault());
 container.addEventListener('pointerdown', handlePointerDown);
 container.addEventListener('pointermove', handlePointerMove);
 container.addEventListener('pointerup', handlePointerUp);
-container.addEventListener('pointercancel', endDragging);
 
 container.addEventListener('touchstart', handleTouchStart, { passive: false });
 container.addEventListener('touchmove', handleTouchMove, { passive: false });
 container.addEventListener('touchend', handleTouchEnd);
-container.addEventListener('touchcancel', endDragging);
