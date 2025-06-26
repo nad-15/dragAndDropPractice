@@ -7,6 +7,7 @@ body {
 }
 
 .container {
+  border: 2px solid red;
   width: 300px;
   display: flex;
   flex-direction: column;
