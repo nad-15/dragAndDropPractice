@@ -22,13 +22,14 @@ body {
   user-select: none;
   touch-action: none;
   transition: background 0.2s ease;
+  cursor: grab;
 }
 
 .item.dragging {
   visibility: hidden;
 }
 
-.ghost {
+/* .ghost {
   position: absolute;
   pointer-events: none;
   opacity: 0.9;
@@ -37,5 +38,23 @@ body {
   border-radius: 5px;
   box-shadow: 0 5px 15px rgba(0,0,0,0.2);
   z-index: 1000;
+}
+ */
+
+
+.item {
+  cursor: grab;
+}
+
+.dragging {
+  opacity: 0.3;
+}
+
+.ghost {
+  opacity: 0.8;
+  pointer-events: none;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  transform: scale(1.05);
+  transition: none !important;
 }
 
