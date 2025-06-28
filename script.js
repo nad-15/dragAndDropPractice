@@ -168,14 +168,42 @@ function handleTouchMove(e) {
 function handleTouchEnd() {
   endDragging();
 }
+function addDragListeners() {
+  document.addEventListener('pointerdown', handlePointerDown);
+  document.addEventListener('pointermove', handlePointerMove);
+  document.addEventListener('pointerup', handlePointerUp);
+  document.addEventListener('pointercancel', endDragging);
 
-// Bind to document for cross-container
-document.addEventListener('pointerdown', handlePointerDown);
-document.addEventListener('pointermove', handlePointerMove);
-document.addEventListener('pointerup', handlePointerUp);
-document.addEventListener('pointercancel', endDragging);
+  document.addEventListener('touchstart', handleTouchStart, { passive: false });
+  document.addEventListener('touchmove', handleTouchMove, { passive: false });
+  document.addEventListener('touchend', handleTouchEnd);
+  document.addEventListener('touchcancel', endDragging);
+}
 
-document.addEventListener('touchstart', handleTouchStart, { passive: false });
-document.addEventListener('touchmove', handleTouchMove, { passive: false });
-document.addEventListener('touchend', handleTouchEnd);
-document.addEventListener('touchcancel', endDragging);
+function removeDragListeners() {
+  document.removeEventListener('pointerdown', handlePointerDown);
+  document.removeEventListener('pointermove', handlePointerMove);
+  document.removeEventListener('pointerup', handlePointerUp);
+  document.removeEventListener('pointercancel', endDragging);
+
+  document.removeEventListener('touchstart', handleTouchStart, { passive: false });
+  document.removeEventListener('touchmove', handleTouchMove, { passive: false });
+  document.removeEventListener('touchend', handleTouchEnd);
+  document.removeEventListener('touchcancel', endDragging);
+}
+
+
+const toggleBtn = document.getElementById('toggle-edit');
+let isEditing = false;
+
+toggleBtn.addEventListener('click', () => {
+  isEditing = !isEditing;
+  toggleBtn.querySelector('.material-icons').textContent = isEditing ? 'done' : 'edit';
+
+  if (isEditing) {
+    addDragListeners();
+  } else {
+    removeDragListeners();
+    endDragging(); // just in case mid-drag
+  }
+});

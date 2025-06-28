@@ -280,3 +280,32 @@
       position: absolute;
       z-index: 10000;
     }
+
+
+    
+.floating-edit-btn {
+  position: absolute;
+  bottom: 16px;
+  right: 16px;
+  width: 48px;
+  height: 48px;
+  background-color: #2196f3;
+  border: none;
+  border-radius: 50%;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  transition: background-color 0.3s ease;
+}
+
+.floating-edit-btn:hover {
+  background-color: #1976d2;
+}
+
+.floating-edit-btn .material-icons {
+  font-size: 24px;
+}
