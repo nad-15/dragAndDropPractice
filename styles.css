@@ -1,10 +1,16 @@
 
-/* 
-    body {
+ body {
       font-family: sans-serif;
       background: #f2f2f2;
       padding: 2rem;
     }
+
+    /* * {
+      border: 1px solid limegreen;
+    } */
+/* 
+
+   
 
     #popup-tasks {
       background: white;
@@ -57,151 +63,219 @@
  */
 
 /* STYLES FOR POPUP AND DRAGGABLE TASKS */
-
 #calendar-pop-up {
-  display: block;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 70%;
-  overflow: hidden;
-  background-color: white;
-  color: black;
-  border-radius: 12px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
-  padding: 20px;
-  padding-top: 0px;
-  z-index: 2000;
+    /* box-sizing: border-box; */
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    /* width: calc(70% + 40px); */
+    width: 82%;
+    height: 70vh;
+    /* overflow-y: auto; */
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    background-color: white;
+    color: black;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
+    /* padding: 20px; */
+    padding: 0px;
+    /* padding-bottom: 7rem; */
+    z-index: 2000;
 }
-
 .popup-header {
-  position: sticky;
-  top: 0;
-  z-index: 1;
-  background-color: transparent;
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  padding-bottom: 5px;
-  padding-top: 20px;
+    box-sizing: border-box;
+    /* position: sticky; */
+    /* top: 0; */
+    z-index: 1;
+    background-color: transparent;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    /* border-bottom: 2px solid #ccc; */
+    padding-bottom: 5px;
+    padding-top: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+
+
 }
 
 #popup-date {
-  font-size: 15px;
-  font-weight: bold;
-  display: inline-block;
-  color: black;
+    /* background-color: red; */
+    font-size: 15px;
+    /* 1.3rem */
+    font-weight: bold;
+    display: inline-block;
+    color: black;
 }
 
+
 #popup-date .weekday {
-  font-size: 1.2rem;
-  font-weight: 600;
+    font-size: 1.2rem;
+    font-weight: 600;
 }
 
 #popup-date .month-year {
-  font-size: 0.8rem;
-  color: black;
+    font-size: 0.8rem;
+    color: black;
 }
+
+.edit-close-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.edit-dailytask-popup {
+    display: none;
+    height: fit-content;
+    width: fit-content;
+    background-color: transparent;
+    border: none;
+}
+
+.close-popup {
+    width: 35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    background: none;
+    border: 2px solid white;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.coffee-video {
+
+    width: 90px;
+    /* Larger than button to simulate zoom-in crop */
+    height: 90px;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+
+.material-icons.close-button-menu-icon {
+    /* color: transparent; */
+}
+
 
 .popup-content-scroll {
-  overflow-y: auto;
-  height: 86%;
-  width: 100%;
-  padding-top: 0;
-  display: flex;
-  flex-direction: column;
-  scrollbar-width: none;
+    box-sizing: border-box;
+    overflow-y: auto;
+    width: 100%;
+    padding-top: 0;
+    display: flex;
+    flex-direction: column;
+    scrollbar-width: none;
+    flex-grow: 1;
+    padding-left: 20px;
+    padding-right: 20px;
+    /* border: 2px solid lime; */
+
 }
 
+/* POP OUT ANIMATION */
+
+
+/* POP OUT ANIMATION END*/
+
 .popup-tasks {
-  display: flex;
-  flex-direction: column;
-  margin: 2px;
-  flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    margin: 2px;
+    flex-grow: 1;
+
 }
 
 .period-section {
-  font-size: 14px;
-  color: #333;
-  margin-bottom: 1.5rem;
-  padding: 1rem;
-  background: #f9f9f9;
-  border-radius: 6px;
+    /* background-color: red; */
+    /* margin-bottom: 20px; */
+    font-size: 14px;
+    /* 1.2rem */
+    color: #333;
+    ;
 }
 
 .dashed-line {
-  border: none;
-  border-top: 1px dashed #aaa;
-  margin: 5px 0 10px 0;
+    border: none;
+    border-top: 1px dashed #aaa;
+    margin: 5px 0 10px 0;
 }
 
 .section-divider {
-  display: flex;
-  align-items: center;
-  text-align: center;
-  color: #aaa;
-  font-weight: bold;
-  margin-bottom: 10px;
-  font-size: 0.8rem;
-  justify-content: center;
-  position: relative;
+    /* background-color: red; */
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: #aaa;
+    font-weight: bold;
+    margin-bottom: 5px;
+    margin-top: 5px;
+    font-size: 8px;
 }
 
 .section-divider::before,
 .section-divider::after {
-  content: '';
-  flex: 1;
-  border-top: 1px solid #aaa;
-  margin: 0 10px;
+    content: '';
+    flex: 1;
+    border-top: 1px solid #aaa;
+    margin: 0 0px;
 }
 
-.event {
-  background: white;
-  padding: 10px 12px;
-  border: 1px solid #ccc;
-  border-left: 5px solid steelblue;
-  border-radius: 4px;
-  margin-bottom: 8px;
-  user-select: none;
-  touch-action: none;
-  cursor: grab;
-}
-
-.event.dragging {
-  visibility: hidden;
-}
-
-.ghost {
-  opacity: 0.8;
-  pointer-events: none;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-  transform: scale(1.05);
-  transition: none !important;
-  position: absolute;
-  z-index: 10000;
-}
 
 .event-content {
-  font-size: 12px;
-  padding: 5px 10px;
-  margin-left: 20px;
-  margin-bottom: 10px;
+    font-size: 12px;
+    /* 1rem */
+    padding: 5px 10px;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-bottom: 5px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-left: 3px solid blue;
+
 }
 
 .event-title {
-  color: black;
+    color: black;
 }
 
 .event-content.no-tasks-for-this-period {
-  padding-left: 0px;
+    padding-left: 0px;
 }
 
 .no-tasks-text {
-  color: #777;
-  font-size: 12px;
-  padding: 5px 10px;
-  margin-left: 20px;
-  margin-bottom: 10px;
-  padding-left: 0px;
+    color: #777;
+    font-size: 12px;
+    padding: 5px 10px;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-bottom: 10px;
+    padding-left: 0px;
+        /* border: 2px solid black; */
+
 }
+
+
+    .event.dragging {
+      visibility: hidden;
+    }
+
+    .ghost {
+      opacity: 0.8;
+      pointer-events: none;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      transform: scale(1.05);
+      transition: none !important;
+      position: absolute;
+      z-index: 10000;
+    }
