@@ -233,6 +233,7 @@
 
 
 .event-content {
+    user-select: none;
     font-size: 12px;
     /* 1rem */
     padding: 5px 10px;
