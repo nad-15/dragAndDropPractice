@@ -16,10 +16,13 @@ function startDragging(x, y, target) {
   const rect = target.getBoundingClientRect();
   offsetY = y - rect.top;
 
-  ghost = target.cloneNode(true);
+  const content = target.querySelector('.event-content');
+  if (!content) return;
+
+  ghost = content.cloneNode(true);
   ghost.classList.add('ghost');
 
-  const computed = getComputedStyle(target);
+  const computed = getComputedStyle(content);
   for (let prop of [
     'width', 'height', 'padding', 'margin',
     'font', 'fontSize', 'fontWeight',
@@ -36,6 +39,7 @@ function startDragging(x, y, target) {
   document.body.appendChild(ghost);
   target.classList.add('dragging');
 }
+
 
 function moveGhostThrottled(y) {
   if (animationFrameId) return;
